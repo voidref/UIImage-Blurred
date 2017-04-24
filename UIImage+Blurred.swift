@@ -2,6 +2,13 @@ import UIKit
 import Accelerate
 
 extension UIImage {
+    /// Blur, tint, and crop
+    ///
+    /// - Parameters:
+    ///   - blurRadius: How blurry, really.
+    ///   - tint: A color that will be drawn over the blur, use an alpha less than 1
+    ///   - rect: If you just want a portion of the image instead of the whole thing 
+    /// - Returns: A blurred, tinted and cropped copy of the image
     public func blurredImage(at blurRadius: CGFloat, tint: UIColor?, from rect: CGRect? = nil) -> UIImage? {
 
         if size.width < 1 || size.height < 1 {
@@ -12,9 +19,7 @@ extension UIImage {
         if blurRadius < CGFloat.ulpOfOne {
             return nil
         }
-
-        // TODO: extract image from self if rect? param present
-    
+  
         let sourceImage: UIImage
         if let rectActual = rect {
             sourceImage = cropping(to: rectActual) ?? self
